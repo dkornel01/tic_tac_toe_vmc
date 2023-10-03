@@ -1,0 +1,16 @@
+.elem{
+    width: 200px;
+    height: 200px;
+    border-color: #000;
+    color: #000;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+    display: grid;
+}
+.egy:hover{
+    background-color: beige;
+}
+.egy{
+    border: black;
+    border: 10px;
+}
