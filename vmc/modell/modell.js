@@ -1,36 +1,48 @@
 class Modell{
-    #lista
+    #lista=[]
     #index
     #lepesszam
-    #endregion
+    //#endregion
     #allapot
     constructor(){
-        this.#allapot= "x";
-        this.#lepesszam=0
+        this.#allapot="o";
+        this.#lepesszam=0;
         this.#lista=[".",".",".",".",".",".",".",".","."];
     }
     setAllapot(index){
         if (this.#allapot==="x"){
-            this.#allapot="O"
+            this.#allapot="o";
         }
         else{
-            this.#allapot="X"
+            this.#allapot="x";
+            
         }
-        this.#lista[index]=this.#allapot
-        console.log(this.#lista)
+        this.#lista[index]=this.#allapot;
         this.#lepesszam++;
     }
     getVegeVanE(){
-        this.#viszintesGyozelem()
-        if(vEll.indexOf("OOO")>-1){
+        for (let valaszt=0;valaszt<3;valaszt++){
+        let vEll=""
+            if (valaszt===0){
+                vEll=this.#fuggolegesGyozelem()
+            }
+            else if (valaszt===1){
+                vEll=this.#viszintesGyozelem()
+            }
+            else{
+                console.log("volt")
+                vEll =this.#atlosgyozelem()
+            }
+        if(vEll.indexOf("ooo")>-1){
             return "O nyert";
         }
-        else if (vEll.indexOf("OOO")>-1) {
+        else if (vEll.indexOf("xxx")>-1) {
             return "X nyert";
         }
         else if (this.#lepesszam===9){
             return "Döntetlen"
         }
+    }
         return "tovább"
     }
     getErtek(){
@@ -38,14 +50,40 @@ class Modell{
     }
     #viszintesGyozelem(){
         let vEll=""
-        for (let index = 0; index < 9; index++) {
-            vEll+=this.#lista
-                if(index%3===2){
+        for (let i = 0; i < 9; i++) {
+            vEll+=this.#lista[i]
+                if(i%3===2){
                     vEll+="@"
                 }
             }
-            console.log(vEll.indexOf("OOO"),vEll.indexOf("XXX"))
+        vEll +="@";
+        return vEll
+    }
+    #fuggolegesGyozelem(){
+        let vEll=""
+        for (let x=0;x<3;x++){
+            for (let y=0;y<9;y++){
+                if (y%3===x%3){
+                    vEll+=this.#lista[y]
+                }
+                
+            }
+            console.log(vEll)
+            vEll+="@";
         }
+        return vEll
+    }
+    #atlosgyozelem(){
+        let vEll="";
+        for (let x=0;x<3;x++){
+            vEll+=this.#lista[x*4]
+        }
+        vEll+="@";
+        for (let y=0;y<3;y++){
+            vEll+=this.#lista[6-y*2]
+        }
+        return vEll
+    }
     /*#sajatEsemenykezelo(){
            const esemeny=new CustomEvent("kivalasztas") 
     }*/
